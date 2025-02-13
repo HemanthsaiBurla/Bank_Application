@@ -26,6 +26,7 @@ public class ProfileOperation extends HttpServlet {
         ResultSet rs = null;
 
         try {
+        	//establishing connection between .java and db.
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/HemanthBank", "root", "root");
 

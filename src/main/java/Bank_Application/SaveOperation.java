@@ -27,25 +27,25 @@ public class SaveOperation extends HttpServlet {
 	    PreparedStatement ps = null;
 
 	    try {
-	        // Load MySQL JDBC driver
+	        // load MySQL JDBC driver
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 
-	        // Connect to the MySQL server
+	        // connect to the MySQL server
 	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/HemanthBank", "root", "root");
 
-	        // Check if the account number already exists
+	        // check if the account number already exists
 	        String checkSql = "SELECT ACCNO FROM bank WHERE ACCNO = ?";
 	        ps = conn.prepareStatement(checkSql);
 	        ps.setString(1, accno);
 	        ResultSet rs = ps.executeQuery();
 
 	        if (rs.next()) {
-	            // If the account number exists, send an error message to the JSP
+	            // if the account number exists, send an error message to the JSP
 	            req.setAttribute("errorMessage", "Account Number already exists. Please try a different one.");
 	            RequestDispatcher ds = req.getRequestDispatcher("Save.jsp");
 	            ds.forward(req, res);
 	        } else {
-	            // Prepare SQL query to insert data
+	            // prepare SQL query to insert data
 	            String insertSql = "INSERT INTO bank (ACCNO, NAME, EMAIL, PASS, GENDER, PHNO, ADDRESS, BALANCE) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	            ps = conn.prepareStatement(insertSql);
 	            ps.setString(1, accno);
@@ -76,7 +76,7 @@ public class SaveOperation extends HttpServlet {
 	        RequestDispatcher ds = req.getRequestDispatcher("Register.jsp");
 	        ds.include(req, res);
 	    } finally {
-	        // Close resources
+	        // close resources
 	        try {
 	            if (ps != null) ps.close();
 	            if (conn != null) conn.close();

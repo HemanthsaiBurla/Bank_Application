@@ -34,10 +34,10 @@ public class DeleteOperation extends HttpServlet {
 
             int deletedRows = ps.executeUpdate();
             if (deletedRows > 0) {
-                // Invalidate session after deleting the profile
+                // invalidate session after deleting the profile
                 session.invalidate();
                 req.setAttribute("message", "Profile deleted successfully.");
-                req.getRequestDispatcher("DeleteSuccess.jsp").forward(req, resp);  // Redirect to login page after successful deletion
+                req.getRequestDispatcher("DeleteSuccess.jsp").forward(req, resp);  // redirect to login page after successful deletion
             } else {
                 req.setAttribute("error", "Failed to delete profile.");
                 req.getRequestDispatcher("DeleteProfile.jsp").forward(req, resp);

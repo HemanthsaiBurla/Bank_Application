@@ -22,7 +22,6 @@
             overflow: hidden;
         }
 
-        /* Adding 20% blur effect on the background */
         body::before {
             content: "";
             position: absolute;
@@ -46,7 +45,7 @@
             width: 100%;
             text-align: center;
             position: relative;
-            z-index: 1; /* Ensures it stays above the blurred background */
+            z-index: 1;
         }
 
         h2 {

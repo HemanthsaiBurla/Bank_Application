@@ -10,7 +10,7 @@
         return;
     }
 
-    // Error message for wrong password
+    // error message for wrong password
     String error = request.getParameter("error");
     String errorr = request.getParameter("errorr");
 %>

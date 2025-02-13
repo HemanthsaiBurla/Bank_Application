@@ -17,7 +17,7 @@ public class LogoutOperation extends HttpServlet {
         response.sendRedirect("Login.jsp");
     }
 
-    // You can also override doGet if you want to support the logout via GET
+    // you can also override doGet if you want to support the logout via GET
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         doPost(request, response);
     }

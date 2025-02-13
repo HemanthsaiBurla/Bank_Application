@@ -21,31 +21,31 @@ public class LoginOperation extends HttpServlet {
         ResultSet rs = null;
 
         try {
-            // Database connection
+            // database connection
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/HemanthBank", "root", "root");
 
-            // Query to check account number
+            // query to check account number
             String accCheckQuery = "SELECT * FROM bank WHERE accno = ?";
             psAccCheck = con.prepareStatement(accCheckQuery);
             psAccCheck.setString(1, accno);
             rs = psAccCheck.executeQuery();
 
             if (rs.next()) {
-                // Account number exists, check the password
+                // account number exists, check the password
                 String storedPass = rs.getString("pass");
                 if (storedPass.equals(pass)) {
                     // Successful login, create a session
                     HttpSession session = req.getSession();
-                    session.setAttribute("accno", accno); // Save accno for CRUD operations
-                    resp.sendRedirect("Dashboard.jsp"); // Redirect to dashboard or home page
+                    session.setAttribute("accno", accno); // save accno for CRUD operations
+                    resp.sendRedirect("Dashboard.jsp"); // redirect to dashboard or home page
                 } else {
                     // Password is wrong
                     req.setAttribute("error", "Password is wrong");
                     req.getRequestDispatcher("Login.jsp").forward(req, resp);
                 }
             } else {
-                // Account number is wrong
+                // account number is wrong
                 req.setAttribute("error", "Account number and password are wrong");
                 req.getRequestDispatcher("Login.jsp").forward(req, resp);
             }

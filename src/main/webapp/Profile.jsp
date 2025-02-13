@@ -26,7 +26,7 @@
         if (rs.next()) {
 %>
             <div class="container">
-                <!-- Circular photo starts here -->
+                <!-- Circular photo here coming -->
                 <div class="photo-container">
     <img src="images/ee.jpg" alt="User Photo">
 </div>

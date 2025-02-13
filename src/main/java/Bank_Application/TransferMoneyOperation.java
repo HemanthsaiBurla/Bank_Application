@@ -37,7 +37,7 @@ public class TransferMoneyOperation extends HttpServlet {
         ResultSet rs = null;
 
         try {
-            // Establish database connection
+            // establish database connection
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hemanthbank", "root", "root");
 
@@ -92,7 +92,7 @@ public class TransferMoneyOperation extends HttpServlet {
             ps.setString(2, receiverAccno);
             ps.executeUpdate();
 
-            // **Insert DEBIT transaction for sender**
+            // Insert DEBIT transaction for sender
             String insertDebitTransactionQuery = "INSERT INTO transactions (sender_accno, receiver_accno, amount, transaction_type, transaction_status, transaction_date) VALUES (?, ?, ?, ?, ?, ?)";
             psInsertTransaction = con.prepareStatement(insertDebitTransactionQuery);
             psInsertTransaction.setString(1, senderAccno);
@@ -103,7 +103,7 @@ public class TransferMoneyOperation extends HttpServlet {
             psInsertTransaction.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now()));
             psInsertTransaction.executeUpdate();
 
-            // **Insert CREDIT transaction for receiver**
+            //insert CREDIT transaction for receiver
             String insertCreditTransactionQuery = "INSERT INTO transactions (sender_accno, receiver_accno, amount, transaction_type, transaction_status, transaction_date) VALUES (?, ?, ?, ?, ?, ?)";
             psInsertTransaction = con.prepareStatement(insertCreditTransactionQuery);
             psInsertTransaction.setString(1, receiverAccno);
@@ -114,7 +114,7 @@ public class TransferMoneyOperation extends HttpServlet {
             psInsertTransaction.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now()));
             psInsertTransaction.executeUpdate();
 
-            // **Redirect with success message**
+            //Redirect with success message
             resp.sendRedirect("TransferSuccess.jsp?message=Transfer successful.");
 
         } catch (SQLException | ClassNotFoundException e) {

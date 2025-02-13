@@ -20,7 +20,7 @@ public class Transaction {
         this.transactionStatus = transactionStatus;
     }
 
-    // Getters and Setters
+    // getters and Setters
     public String getSenderAccno() { return senderAccno; }
     public void setSenderAccno(String senderAccno) { this.senderAccno = senderAccno; }
 

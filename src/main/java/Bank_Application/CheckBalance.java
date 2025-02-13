@@ -21,17 +21,17 @@ public class CheckBalance extends HttpServlet {
             return;
         }
 
-        String pass = req.getParameter("pass"); // Get password from form
+        String pass = req.getParameter("pass"); // get password from,, form
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
 
         try {
-            // Establish database connection
+            // establish database connection
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/HemanthBank", "root", "root");
 
-            // Query to fetch password and balance
+            // query to fetch password and balance
             String query = "SELECT pass, balance FROM bank WHERE accno = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, accno);
@@ -40,17 +40,17 @@ public class CheckBalance extends HttpServlet {
             if (rs.next()) {
                 String storedPass = rs.getString("pass");
                 if (storedPass.equals(pass)) {
-                    // Correct password; retrieve balance
+                    // correct password; retrieve balance
                     String balance = rs.getString("balance");
-                    req.setAttribute("balance", balance); // Pass balance to JSP
+                    req.setAttribute("balance", balance); // pass balance to JSP
                     req.getRequestDispatcher("CheckBalance.jsp").forward(req, resp);
                 } else {
-                    // Incorrect password
+                    // incorrect password
                     req.setAttribute("error", "Invalid password. Please try again.");
                     req.getRequestDispatcher("CheckBalance.jsp").forward(req, resp);
                 }
             } else {
-                // Account number not found (unexpected since it's in the session)
+                // account number not found (unexpected since its in the session)
                 req.setAttribute("error", "Account details not found.");
                 req.getRequestDispatcher("CheckBalance.jsp").forward(req, resp);
             }

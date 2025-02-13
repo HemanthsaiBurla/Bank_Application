@@ -35,11 +35,11 @@ public class ShowTransactionsServlet extends HttpServlet {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            // Establish connection
+            // establish connection
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/HemanthBank", "root", "root");
 
-            // Fetch transactions for the logged-in user (both sent and received)
+            // fetch transactions for the logged-in user (both sent and received)
             String query = "SELECT sender_accno, receiver_accno, amount, transaction_type, transaction_date, transaction_status FROM transactions WHERE sender_accno = ? OR receiver_accno = ? ORDER BY transaction_date DESC";
             ps = con.prepareStatement(query);
             ps.setString(1, userAccno);
@@ -47,7 +47,7 @@ public class ShowTransactionsServlet extends HttpServlet {
 
             rs = ps.executeQuery();
 
-            // Store the transactions in a list
+            // store the transactions in a list
             List<Transaction> transactions = new ArrayList<>();
             while (rs.next()) {
                 Transaction txn = new Transaction(
@@ -64,10 +64,10 @@ public class ShowTransactionsServlet extends HttpServlet {
             
             
             System.out.println(transactions);
-            // Set the transactions list in the request attribute
+            // set the transactions list in the request attribute
             req.setAttribute("transactions", transactions);
 
-            // Forward to the JSP page to display the transactions
+            // forward to the JSP page to display the transactions
             req.getRequestDispatcher("ShowTransactions.jsp").forward(req, resp);
 
         } catch (Exception e) {
