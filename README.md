@@ -119,7 +119,15 @@ Java Servlets, JSP, MySQL, and CSS
 ## Logout 
 ![image alt](https://github.com/HemanthsaiBurla/Bank_Application/blob/main/Bank_Application_Interfaces/Logout.png)
 
-
+# License
+ 
+ This project is licensed under the MIT License.
+ 
+# Contributing
+ 
+ Feel free to submit issues or pull requests to improve this project.
+ 
+ Made with ❤️ by [HemanthSai Burla](https://www.linkedin.com/in/hemanthsaiburla/)
 
 
 
